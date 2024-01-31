@@ -36,10 +36,22 @@ class App extends React.Component {
 
     // 복사한 데이터에 데이터를 추가
     thisItems.push(item)
-    // 복사한 데이터를 다시 state에 적용
+    // 복사한 데이터를 다시 원본 state에 적용
     this.setState({items : thisItems});
   }
 
+  // 삭제를 위한 메서드 생성
+  delete = (item) => {
+    // state나 props의 데이터는 직접 편집이 안된다.
+    const thisItems = this.state.items;
+    // 복사본에서 item을 제거한다.
+    // filter 함수는 return 타입이 boolean 함수를 매개변수로 받아
+    // 결과가 true 인 데이터만 모아 배열로 return하는 함수이다.
+    const newItems = thisItems.filter((e) => e.id !== item.id)
+    // 복사한 데이터를 다시 원본 state에 적용
+    this.setState({items : newItems})
+  }
+  
   render(){
     // 배열을 순회하며 출력할 내용을 생성
     // item은 배열을 순회할 때 각각의 데이터이고 idx는 인덱스
@@ -54,7 +66,7 @@ class App extends React.Component {
      <Paper style = {{margin : 16}} > 
       <List>
         {this.state.items.map((item, idx)  => (
-          <ToDo item ={item} key = {idx} />
+          <ToDo item ={item} key = {idx} delete = {this.delete}/>
         ))}
       </List>
     </Paper>

@@ -6,14 +6,12 @@ import { TextField, Paper, Button, Grid } from "@material-ui/core"
 class AddToDo extends React.Component{
     constructor(props){
         super(props);
-
         // App.js에서 넘겨준 메서드를 add에 저장
         this.add = props.add;
-
         // 입력한 문자열을 저장하기 위한 속성을 생성
         this.state = {item : {title : ""}}
     }
-
+    
     // TextField에서 값을 입력할 때 마다 호출되는 이벤트 리스너
     onInputChange = (e) => {
         // state.title에 입력한 내용을 대입
